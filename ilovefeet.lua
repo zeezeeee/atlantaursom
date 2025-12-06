@@ -1,6 +1,5 @@
 -- real: https://raw.githubusercontent.com/i77lhm/Libraries/refs/heads/main/Atlanta/Library.lua
 -- just editing some things for my script
-
 -- variables
 local uis = cloneref(game:GetService("UserInputService"))
 local players = cloneref(game:GetService("Players"))
@@ -653,7 +652,7 @@ local config_holder
 
             -- button
             image = options.image or "rbxassetid://79856374238119",
-            open = options.open or true,
+            open = options.open ~= nil and options.open or true,
 
             -- ignore
             items = {},
@@ -662,7 +661,7 @@ local config_holder
         local items = cfg.items do 
             -- Panel
                 items.sgui = library:create("ScreenGui", {
-                    Enabled = true,
+                    Enabled = cfg.open,
                     Parent = gethui(),
                     Name = "" 
                 })
@@ -1532,6 +1531,7 @@ local config_holder
                 size = dim2(0, 604, 0, 628),
                 position = dim2(0, (camera.ViewportSize.X / 2) - 302 - 96, 0, (camera.ViewportSize.Y / 2) - 421 - 12),
                 image = "rbxassetid://98823308062942",
+                open = true,
             })
 
             local items = main_window.items
@@ -1631,6 +1631,7 @@ local config_holder
                 size = dim2(0, 394, 0, 464),
                 position = dim2(0, main_window.items.main_holder.AbsolutePosition.X + main_window.items.main_holder.AbsoluteSize.X + 2, 0, main_window.items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://115194686863276",
+                open = false,
             })
 
             local watermark = library:watermark({default = os.date('Atlanta |  - %b %d %Y - %H:%M:%S')})  
@@ -1735,6 +1736,7 @@ local config_holder
                 size = dim2(0, 324, 0, 410),
                 position = dim2(0, items.main_holder.AbsolutePosition.X + items.main_holder.AbsoluteSize.X + 2, 0, items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://105199726008012",
+                open = false,
             }) 
 
             local items = holder.items
@@ -1796,6 +1798,7 @@ local config_holder
                 size = dim2(0, 300, 0, 325),
                 position = dim2(0, style.items.main_holder.AbsolutePosition.X, 0, style.items.main_holder.AbsolutePosition.Y + style.items.main_holder.AbsoluteSize.Y + 2),
                 image = "rbxassetid://77684377836328",
+                open = false,
             })  
             
             local items = holder.items
@@ -1811,6 +1814,7 @@ local config_holder
                 size = dim2(0, 529, 0, 445),
                 position = dim2(0, main_window.items.main_holder.AbsolutePosition.X - 531, 0, main_window.items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://107070078834415",
+                open = false,
             })  
             
             local items = holder.items
@@ -5927,4 +5931,4 @@ local config_holder
 -- 
 -- 
 
-return library, themes; 
+return library, themes;  
