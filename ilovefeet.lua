@@ -1228,7 +1228,14 @@ local config_holder
         local window = {opened = true}            
         local opened = {}
         local dock_outline;
-        local hide_extra = (getgenv and (getgenv().ATLANTA_MAIN_ONLY or getgenv().ATLANTA_HIDE_EXTRA)) or false
+        local env = getgenv and getgenv() or {}
+        local hide_extra = env.ATLANTA_MAIN_ONLY
+        if hide_extra == nil then
+            hide_extra = env.ATLANTA_HIDE_EXTRA
+        end
+        if hide_extra == nil then
+            hide_extra = true
+        end
         local blur = library:create( "BlurEffect" , {
             Parent = lighting;
             Enabled = true;
@@ -1633,7 +1640,7 @@ local config_holder
                 size = dim2(0, 394, 0, 464),
                 position = dim2(0, main_window.items.main_holder.AbsolutePosition.X + main_window.items.main_holder.AbsoluteSize.X + 2, 0, main_window.items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://115194686863276",
-                open = not hide_extra,
+                open = not hide_extra and true or false,
             })
 
             local watermark = library:watermark({default = os.date('Atlanta |  - %b %d %Y - %H:%M:%S')})  
@@ -1738,7 +1745,7 @@ local config_holder
                 size = dim2(0, 324, 0, 410),
                 position = dim2(0, items.main_holder.AbsolutePosition.X + items.main_holder.AbsoluteSize.X + 2, 0, items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://105199726008012",
-                open = not hide_extra,
+                open = not hide_extra and true or false,
             }) 
 
             local items = holder.items
@@ -1800,7 +1807,7 @@ local config_holder
                 size = dim2(0, 300, 0, 325),
                 position = dim2(0, style.items.main_holder.AbsolutePosition.X, 0, style.items.main_holder.AbsolutePosition.Y + style.items.main_holder.AbsoluteSize.Y + 2),
                 image = "rbxassetid://77684377836328",
-                open = not hide_extra,
+                open = not hide_extra and true or false,
             })  
             
             local items = holder.items
@@ -1816,7 +1823,7 @@ local config_holder
                 size = dim2(0, 529, 0, 445),
                 position = dim2(0, main_window.items.main_holder.AbsolutePosition.X - 531, 0, main_window.items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://107070078834415",
-                open = not hide_extra,
+                open = not hide_extra and true or false,
             })  
             
             local items = holder.items
