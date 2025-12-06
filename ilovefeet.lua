@@ -222,23 +222,26 @@ for _, path in next, library.folders do
     makefolder(library.directory .. path)
 end 
 
-writefile("ffff.ttf", game:HttpGet("https://github.com/weasely111/beta/raw/refs/heads/main/fs-tahoma-8px.ttf"))
+local font_ttf_path = "atlanta_font.ttf"
+local font_family_path = "atlanta_font.json"
 
-local tahoma = {
+writefile(font_ttf_path, game:HttpGet("https://github.com/weasely111/beta/raw/refs/heads/main/fs-tahoma-8px.ttf"))
+
+local font_family = {
     name = "SmallestPixel7",
     faces = {
         {
             name = "Regular",
             weight = 400,
             style = "normal",
-            assetId = getcustomasset("ffff.ttf")
+            assetId = getcustomasset(font_ttf_path)
         }
     }
 }
 
-writefile("dddd.ttf", http_service:JSONEncode(tahoma))
+writefile(font_family_path, http_service:JSONEncode(font_family))
 
-library.font = Font.new(getcustomasset("dddd.ttf"), Enum.FontWeight.Regular)
+library.font = Font.new(getcustomasset(font_family_path), Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
 local config_holder 
 -- 
@@ -1535,8 +1538,22 @@ local config_holder
         --  
 
         -- main window
+            local place_names = {
+                [109397169461300] = "siege.services | sniper duels",
+                [4588604953] = "siege.services | criminality",
+                [4991214437] = "siege.services | town"
+            }
+
+            local default_title = "siege.services | global"
+            local resolved_name = default_title
+            if properties and properties.name then
+                resolved_name = properties.name
+            else
+                resolved_name = place_names[game.PlaceId] or default_title
+            end
+
             local main_window = library:panel({
-                name = properties and properties.name or "Atlanta | ", 
+                name = resolved_name, 
                 size = dim2(0, 604, 0, 628),
                 position = dim2(0, (camera.ViewportSize.X / 2) - 302 - 96, 0, (camera.ViewportSize.Y / 2) - 421 - 12),
                 image = "rbxassetid://98823308062942",
