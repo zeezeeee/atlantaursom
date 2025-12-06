@@ -1,5 +1,6 @@
--- real: https://raw.githubusercontent.com/i77lhm/Libraries/refs/heads/main/Atlanta/Library.lua
--- just editing some things for my script
+-- REASON: Dumbass customer put their library in a request and flexed his non existant security and ended up getting it leaked by himself... 😭
+-- The code here is horrendous this is my 2nd library, the added on code was made to suit the old code however I should have just converted to a newer version of my code kind of an oopsie. 
+
 -- variables
 local uis = cloneref(game:GetService("UserInputService"))
 local players = cloneref(game:GetService("Players"))
@@ -1227,6 +1228,7 @@ local config_holder
         local window = {opened = true}            
         local opened = {}
         local dock_outline;
+        local hide_extra = (getgenv and (getgenv().ATLANTA_MAIN_ONLY or getgenv().ATLANTA_HIDE_EXTRA)) or false
         local blur = library:create( "BlurEffect" , {
             Parent = lighting;
             Enabled = true;
@@ -1631,7 +1633,7 @@ local config_holder
                 size = dim2(0, 394, 0, 464),
                 position = dim2(0, main_window.items.main_holder.AbsolutePosition.X + main_window.items.main_holder.AbsoluteSize.X + 2, 0, main_window.items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://115194686863276",
-                open = false,
+                open = not hide_extra,
             })
 
             local watermark = library:watermark({default = os.date('Atlanta |  - %b %d %Y - %H:%M:%S')})  
@@ -1736,7 +1738,7 @@ local config_holder
                 size = dim2(0, 324, 0, 410),
                 position = dim2(0, items.main_holder.AbsolutePosition.X + items.main_holder.AbsoluteSize.X + 2, 0, items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://105199726008012",
-                open = false,
+                open = not hide_extra,
             }) 
 
             local items = holder.items
@@ -1798,7 +1800,7 @@ local config_holder
                 size = dim2(0, 300, 0, 325),
                 position = dim2(0, style.items.main_holder.AbsolutePosition.X, 0, style.items.main_holder.AbsolutePosition.Y + style.items.main_holder.AbsoluteSize.Y + 2),
                 image = "rbxassetid://77684377836328",
-                open = false,
+                open = not hide_extra,
             })  
             
             local items = holder.items
@@ -1814,7 +1816,7 @@ local config_holder
                 size = dim2(0, 529, 0, 445),
                 position = dim2(0, main_window.items.main_holder.AbsolutePosition.X - 531, 0, main_window.items.main_holder.AbsolutePosition.Y),
                 image = "rbxassetid://107070078834415",
-                open = false,
+                open = not hide_extra,
             })  
             
             local items = holder.items
@@ -5931,4 +5933,4 @@ local config_holder
 -- 
 -- 
 
-return library, themes;  
+return library, themes; 
